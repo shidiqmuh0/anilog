@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AniLog - Simpan Judul Anime</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-qlRINdwDxJT2cQGp95T3TjPPuZC9pBooyFVJ7Fh6gxC5jZImZmk+ELZY30Qgf2LtD5FyzBZ9NB+j7brFEZFk5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-heart"></i> AniLog <i class="fas fa-heart"></i></h1>
+            <p>Simpan Judul Anime</p>
+            <p><i>Ini masih di local storage untuk penyimpanan judul anime</i></p>
+        </header>
+        <main>
+            <section class="search-section">
+                <h2>Cari Anime</h2>
+                <form id="animeForm">
+                    <input type="text" id="title" placeholder="Cari Judul Anime" required>
+                    <button type="submit"><i class="fas fa-search"></i>Cari</button>
+                </form>
+                <div id="animeSearchResults">
+                    <!-- Anime search results will be rendered here -->
+                </div>
+                <div id="pagination">
+                    <button id="prevPage" disabled><b><-</b></button>
+                    <button id="nextPage"><b>-></b></button>
+                </div>
+            </section>
+            <section class="watchlist-section">
+                <h2>Watchlist</h2>
+                <div id="animeWatchlist">
+                    <!-- Watchlist will be rendered here -->
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p>Developed by Shidiq <a href="https://twitter.com/shdqm0">Twitter</a> and <a href="https://github.com/shidiqmuh0">GitHub</a></p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
