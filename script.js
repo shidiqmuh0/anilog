@@ -58,6 +58,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         for (let i = startIndex; i < endIndex; i++) {
             const anime = searchResults[i];
+
+            // Skip anime with genre 'Hentai'
+            if (anime.genres.some(genre => genre.name === 'Hentai')) {
+                continue;
+            }
+
             const animeItem = document.createElement('div');
             animeItem.classList.add('anime-item');
 
