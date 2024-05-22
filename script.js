@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>Episodes: ${anime.episodes}</p>
                     <p>Status: ${anime.status}</p>
                 </div>
-                <button class="add-to-watchlist"><b></b></button>
+                <button class="add-to-watchlist"><i class="fas fa-plus"></button>
             `;
 
             animeItem.querySelector('.add-to-watchlist').addEventListener('click', () => {
@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>${anime.episodes}</p>
                     <p>${anime.status}</p>
                 </div>
-                <button class="remove-from-watchlist"><i class="fas fa-trash-alt"></i><b></b></button>
+                <button class="remove-from-watchlist"><i class="fas fa-trash-alt"></i></button>
             `;
 
             watchlistItem.querySelector('.remove-from-watchlist').addEventListener('click', () => {
