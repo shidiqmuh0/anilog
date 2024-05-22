@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>Episodes: ${anime.episodes}</p>
                     <p>Status: ${anime.status}</p>
                 </div>
-                <button class="add-to-watchlist"><i class="fas fa-plus"></button>
+                <button class="add-to-watchlist"><i class="fas fa-plus"></i></button>
             `;
 
             animeItem.querySelector('.add-to-watchlist').addEventListener('click', () => {
