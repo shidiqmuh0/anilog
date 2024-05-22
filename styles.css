@@ -211,3 +211,11 @@ footer p {
         font-size: 0.8em;
     }
 }
+
+#logo {
+    width: 20%;
+}
+
+header p {
+    margin: 8px;
+}
