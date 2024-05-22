@@ -2,13 +2,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const animeForm = document.getElementById('animeForm');
     const animeSearchResults = document.getElementById('animeSearchResults');
     const animeWatchlist = document.getElementById('animeWatchlist');
-    const prevPageButton = document.getElementById('prevPage');
-    const nextPageButton = document.getElementById('nextPage');
+    const prevSearchPageButton = document.getElementById('prevSearchPage');
+    const nextSearchPageButton = document.getElementById('nextSearchPage');
+    const searchPagination = document.getElementById('searchPagination');
+    const prevWatchlistPageButton = document.getElementById('prevWatchlistPage');
+    const nextWatchlistPageButton = document.getElementById('nextWatchlistPage');
+    const watchlistPagination = document.getElementById('watchlistPagination');
 
     let currentPage = 1;
     let totalPages = 1;
     const resultsPerPage = 5;
     let searchResults = [];
+    let watchlistPage = 1;
+    let watchlistTotalPages = 1;
 
     // Load watchlist from localStorage
     loadWatchlist();
@@ -20,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Clear previous search results
         animeSearchResults.innerHTML = '';
+        searchPagination.style.display = 'none'; // Hide pagination initially
 
         const response = await fetch(`https://api.jikan.moe/v4/anime?q=${title}`);
         const data = await response.json();
@@ -29,24 +36,46 @@ document.addEventListener('DOMContentLoaded', () => {
         currentPage = 1;
 
         renderSearchResults();
-        updatePaginationButtons();
+        updateSearchPaginationButtons();
+
+        if (searchResults.length > 0) {
+            searchPagination.style.display = 'block'; // Show pagination if there are results
+        } else {
+            searchPagination.style.display = 'none'; // Hide pagination if no results
+        }
 
         animeForm.reset();
     });
 
-    prevPageButton.addEventListener('click', () => {
+    prevSearchPageButton.addEventListener('click', () => {
         if (currentPage > 1) {
             currentPage--;
             renderSearchResults();
-            updatePaginationButtons();
+            updateSearchPaginationButtons();
         }
     });
 
-    nextPageButton.addEventListener('click', () => {
+    nextSearchPageButton.addEventListener('click', () => {
         if (currentPage < totalPages) {
             currentPage++;
             renderSearchResults();
-            updatePaginationButtons();
+            updateSearchPaginationButtons();
+        }
+    });
+
+    prevWatchlistPageButton.addEventListener('click', () => {
+        if (watchlistPage > 1) {
+            watchlistPage--;
+            renderWatchlist();
+            updateWatchlistPaginationButtons();
+        }
+    });
+
+    nextWatchlistPageButton.addEventListener('click', () => {
+        if (watchlistPage < watchlistTotalPages) {
+            watchlistPage++;
+            renderWatchlist();
+            updateWatchlistPaginationButtons();
         }
     });
 
@@ -87,9 +116,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function updatePaginationButtons() {
-        prevPageButton.disabled = currentPage === 1;
-        nextPageButton.disabled = currentPage === totalPages;
+    function updateSearchPaginationButtons() {
+        prevSearchPageButton.disabled = currentPage === 1;
+        nextSearchPageButton.disabled = currentPage === totalPages;
     }
 
     function addToWatchlist(animeItem) {
@@ -143,12 +172,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         localStorage.setItem('animeWatchlist', JSON.stringify(watchlist));
+        watchlistTotalPages = Math.ceil(watchlist.length / resultsPerPage);
+        watchlistPage = 1;
+        renderWatchlist();
+        updateWatchlistPaginationButtons();
     }
 
     function loadWatchlist() {
         const watchlist = JSON.parse(localStorage.getItem('animeWatchlist')) || [];
+        watchlistTotalPages = Math.ceil(watchlist.length / resultsPerPage);
+        watchlistPage = 1;
+        renderWatchlist();
+        updateWatchlistPaginationButtons();
+    }
 
-        watchlist.forEach(anime => {
+    function renderWatchlist() {
+        animeWatchlist.innerHTML = '';
+
+        const watchlist = JSON.parse(localStorage.getItem('animeWatchlist')) || [];
+        const startIndex = (watchlistPage - 1) * resultsPerPage;
+        const endIndex = Math.min(startIndex + resultsPerPage, watchlist.length);
+
+        for (let i = startIndex; i < endIndex; i++) {
+            const anime = watchlist[i];
+
             const watchlistItem = document.createElement('div');
             watchlistItem.classList.add('anime-item');
 
@@ -169,6 +216,12 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             animeWatchlist.appendChild(watchlistItem);
-        });
+        }
+    }
+
+    function updateWatchlistPaginationButtons() {
+        prevWatchlistPageButton.disabled = watchlistPage === 1;
+        nextWatchlistPageButton.disabled = watchlistPage === watchlistTotalPages;
+        watchlistPagination.style.display = watchlistTotalPages > 1 ? 'block' : 'none';
     }
 });

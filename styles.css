@@ -1,5 +1,5 @@
 body {
-    font-family: cursive, sans-serif;
+    font-family: cursive, sans-serif; /* Mengganti dengan font lebih umum */
     background-color: #f0f8ff;
     margin: 0;
     padding: 0;
@@ -18,8 +18,7 @@ body {
     border-radius: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
 header {
@@ -44,20 +43,17 @@ p {
 
 main {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     gap: 20px;
 }
 
 .search-section, .watchlist-section {
     flex: 1;
-    padding: 30px;
+    padding: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
     background-color: #fff;
-}
-
-.search-container, .watchlist-container {
-    text-align: left;
 }
 
 form {
@@ -65,6 +61,7 @@ form {
     justify-content: center;
     gap: 10px;
     margin-bottom: 20px;
+    flex-wrap: wrap; /* Menambahkan flex-wrap untuk responsivitas */
 }
 
 input, button {
@@ -76,6 +73,7 @@ input, button {
 
 input {
     flex: 1;
+    min-width: 200px; /* Menambahkan min-width untuk input */
 }
 
 button {
@@ -99,11 +97,11 @@ button:hover {
     background: #fff;
     padding: 15px;
     margin: 20px 0;
-    border: #ff1493 solid 1px;
+    border: 1px solid #ff1493;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center elements */
+    align-items: center;
     gap: 15px;
     box-shadow: 7px 7px 0 #ff149158;
 }
@@ -117,7 +115,7 @@ button:hover {
 
 .anime-item div {
     flex: 1;
-    text-align: center; /* Center text */
+    text-align: center;
 }
 
 .anime-item h3 {
@@ -126,7 +124,7 @@ button:hover {
 }
 
 .anime-item p {
-    margin: 0; /* Remove previous margin */
+    margin: 0;
     font-size: 0.9em;
 }
 
@@ -146,10 +144,11 @@ button:hover {
     transform: scale(1.05);
 }
 
-#pagination {
+#searchPagination, #watchlistPagination {
     display: flex;
     justify-content: center;
     gap: 10px;
+    margin-top: 10px; /* Menambahkan margin-top untuk pagination */
 }
 
 button:disabled {
